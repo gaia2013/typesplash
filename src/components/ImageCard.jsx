@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
+import ImageModal from './ImageModal'
 
 const ImageCard = (props) => {
+  const [modalShow, setModalShow] = useState(false)
   // constructor ... 初期表示に必要な処理を書く
   // constructor(props) {
   //   super(props) // 親componentのconstructorを呼び出せる-> this.propsを使えるようになる
@@ -29,9 +31,19 @@ const ImageCard = (props) => {
   // }
 
   return (
-    <div style={{ gridRowEnd: `span ${spans}` }}>
-      <img ref={imageRef} alt={description} src={urls.regular} />
-    </div >
+    <>
+      <div style={{ gridRowEnd: `span ${spans}` }}>
+        <img className='ImageCard' onClick={() => setModalShow(true)} ref={imageRef} alt={description} src={urls.regular} />
+      </div >
+
+      <ImageModal
+        image={props.image}
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        size={"lg"}
+      />
+    </>
+
   )
 
 }
